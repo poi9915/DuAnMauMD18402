@@ -33,10 +33,13 @@
             android:contentDescription="ADD" />
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/naviView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:headerLayout="@layout/navi_header"/>
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_item"
+        />
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

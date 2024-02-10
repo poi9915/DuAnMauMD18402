@@ -19,6 +19,10 @@ public class Sach {
         MaLoai = maLoai;
     }
 
+    public Sach() {
+
+    }
+
     public int getMaSach() {
         return MaSach;
     }

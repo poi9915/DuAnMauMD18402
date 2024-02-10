@@ -24,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createThuThu);
 
         String createThanhVien = "create table ThanhVien(" +
-                "    MaTV integer primary key autoincrement ," +
+                "    MaTV text primary key autoincrement ," +
                 "    HoTen text not null ," +
                 "    NamSinh text not null " +
                 ");";
@@ -46,8 +46,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createSach);
         String createPhieuMuon = "create table PhieuMuon(" +
                 "    MaPM integer primary key autoincrement ," +
-                "    MaTT integer not null ," +
-                "    MaTV integer not null ," +
+                "    MaTT text not null ," +
+                "    MaTV text not null ," +
                 "    MaSach integer not null ," +
                 "    Ngay date not null ," +
                 "    TraSach integer not null ," +

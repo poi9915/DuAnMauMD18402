@@ -1,5 +1,6 @@
 package fpoly.trungnqph45090.duanmau.DAO;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -18,35 +19,48 @@ public class ThanhVienDAO {
         this.dbHelper = new DbHelper(context);
         db = dbHelper.getWritableDatabase();
     }
-    public void insertThanhVien(ThanhVien thanhVien){
+
+    public long insertThanhVien(ThanhVien thanhVien) {
         ContentValues values = new ContentValues();
-        values.put("MaTV" , thanhVien.getMaTV());
-        values.put("HoTen" ,thanhVien.getHoTen());
-        values.put("NamSinh" , thanhVien.getNamSinh());
-        db.insert("ThanhVien" , null  , values);
+        values.put("HoTen", thanhVien.getHoTen());
+        values.put("NamSinh", thanhVien.getNamSinh());
+        return db.insert("ThanhVien", null, values);
     }
-    public ArrayList<ThanhVien> getAllThanhVien(){
+
+    @SuppressLint("Range")
+    public ArrayList<ThanhVien> getData(String sql, String... selectionArgs) {
         ArrayList<ThanhVien> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from ThanhVien" , null);
-        if (cursor.getCount() > 0){
-            cursor.moveToFirst();
-            do {
-                int id = cursor.getInt(0);
-                String hoten = cursor.getString(1);
-                String namSinh = cursor.getString(2);
-                list.add(new ThanhVien(id  , hoten, namSinh));
-            }while (cursor.moveToNext());
+        Cursor cursor = db.rawQuery(sql, selectionArgs);
+        while (cursor.moveToNext()) {
+            ThanhVien obj = new ThanhVien();
+            obj.setMaTV(cursor.getString(cursor.getColumnIndex("MaTV")));
+            obj.setHoTen(cursor.getString(cursor.getColumnIndex("HoTen")));
+            obj.setNamSinh(cursor.getString(cursor.getColumnIndex("NamSinh")));
+            list.add(obj);
         }
         return list;
     }
-    public int removeThanhVien(ThanhVien thanhVien){
-        String[] id = new String[]{String.valueOf(thanhVien.getMaTV())};
-        return db.delete("ThanhVien" , "MaTV = ?" , id);
+
+    public ArrayList<ThanhVien> getAll() {
+        String sql = "SELECT * FROM ThanhVien";
+        return getData(sql);
     }
-    public int updateThanhVien(ThanhVien thanhVien){
+
+    public ThanhVien getByID(String id) {
+        String sql = "SELECT * FROM ThanhVien WHERE MaTV=?";
+        ArrayList<ThanhVien> list = getData(sql, id);
+        return list.get(0);
+    }
+
+    public int removeThanhVien(ThanhVien thanhVien) {
+        String[] id = new String[]{String.valueOf(thanhVien.getMaTV())};
+        return db.delete("ThanhVien", "MaTV = ?", id);
+    }
+
+    public int updateThanhVien(ThanhVien thanhVien) {
         ContentValues values = new ContentValues();
-        values.put("HoTen" ,thanhVien.getHoTen());
-        values.put("NamSinh" , thanhVien.getNamSinh());
-        return db.update("ThanhVien" , values , "MaTV = ?",new String[]{String.valueOf(thanhVien.getMaTV())});
+        values.put("HoTen", thanhVien.getHoTen());
+        values.put("NamSinh", thanhVien.getNamSinh());
+        return db.update("ThanhVien", values, "MaTV = ?", new String[]{String.valueOf(thanhVien.getMaTV())});
     }
 }

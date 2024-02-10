@@ -18,7 +18,7 @@
                 android:icon="@drawable/ic_manager_book"
                 android:title="Quản lý sách" />
             <item
-                android:id="@+id/inmu_QLtv"
+                android:id="@+id/imnu_QLtv"
                 android:icon="@drawable/ic_manager_accounts"
                 android:title="Quản lý Thành Viên" />
         </menu>

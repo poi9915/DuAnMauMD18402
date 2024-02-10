@@ -3,15 +3,15 @@ package fpoly.trungnqph45090.duanmau.Models;
 import java.util.Date;
 
 public class PhieuMuon {
-    private int maPM ;
-    private int maTT;
-    private int maTV;
+    private int maPM;
+    private String maTT;
+    private String maTV;
     private int MaSach;
     private Date Ngay;
     private int TraSach;
     private int TienThue;
 
-    public PhieuMuon(int maPM, int maTT, int maTV, int maSach, Date ngay, int traSach, int tienThue) {
+    public PhieuMuon(int maPM, String maTT, String maTV, int maSach, Date ngay, int traSach, int tienThue) {
         this.maPM = maPM;
         this.maTT = maTT;
         this.maTV = maTV;
@@ -21,7 +21,7 @@ public class PhieuMuon {
         TienThue = tienThue;
     }
 
-    public PhieuMuon(int maTT, int maTV, int maSach, Date ngay, int traSach, int tienThue) {
+    public PhieuMuon(String maTT, String maTV, int maSach, Date ngay, int traSach, int tienThue) {
         this.maTT = maTT;
         this.maTV = maTV;
         MaSach = maSach;
@@ -31,6 +31,7 @@ public class PhieuMuon {
     }
 
     public PhieuMuon() {
+
     }
 
     public int getMaPM() {
@@ -41,19 +42,19 @@ public class PhieuMuon {
         this.maPM = maPM;
     }
 
-    public int getMaTT() {
+    public String getMaTT() {
         return maTT;
     }
 
-    public void setMaTT(int maTT) {
+    public void setMaTT(String maTT) {
         this.maTT = maTT;
     }
 
-    public int getMaTV() {
+    public String getMaTV() {
         return maTV;
     }
 
-    public void setMaTV(int maTV) {
+    public void setMaTV(String maTV) {
         this.maTV = maTV;
     }
 

@@ -2,6 +2,8 @@ package fpoly.trungnqph45090.duanmau.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,16 +18,20 @@ import fpoly.trungnqph45090.duanmau.R;
  * create an instance of this fragment.
  */
 public class QuanLyPhieuMuonFragment extends Fragment {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
 
     public QuanLyPhieuMuonFragment() {
 
     }
 
 
-    public static QuanLyPhieuMuonFragment newInstance(String param1, String param2) {
-        QuanLyPhieuMuonFragment fragment = new QuanLyPhieuMuonFragment();
+    public static QuanLyPhieuMuonFragment newInstance() {
 
-        return fragment;
+        return new QuanLyPhieuMuonFragment();
     }
 
     @Override

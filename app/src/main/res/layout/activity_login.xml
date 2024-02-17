@@ -50,6 +50,7 @@
             android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
     <RadioButton
+        android:id="@+id/chkRem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ghi nhớ mật khẩu"

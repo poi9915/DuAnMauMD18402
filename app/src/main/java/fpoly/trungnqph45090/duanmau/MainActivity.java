@@ -12,10 +12,12 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.navigation.NavigationView;
 
+import fpoly.trungnqph45090.duanmau.Fragments.DoiMatKhauFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLyLoaiSachFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLyPhieuMuonFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLySachFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLyThanhVienFragment;
+import fpoly.trungnqph45090.duanmau.Fragments.ThemThanhVienFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,35 +45,41 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
         actionBarDrawerToggle.syncState();
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
-        setFragment(new QuanLyPhieuMuonFragment());
-        toolbar.setTitle("Quản lý phiếu mượn");
+        setFragment(new QuanLyPhieuMuonFragment(),"Quản lý phiếu mượn");
         //tạo set fragment cho activity
         naviView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 //Quản lý Fragment
                 if (item.getItemId() == R.id.imnu_QLpm) {
-                    toolbar.setTitle("Quản lý phiếu mượn");
-                    setFragment(new QuanLyPhieuMuonFragment());
-                }if (item.getItemId() == R.id.imnu_QLls){
-                    toolbar.setTitle("Quản Lý loai sach");
-                    setFragment(new QuanLyLoaiSachFragment());
-                }if (item.getItemId() == R.id.imnu_QLs){
-                    toolbar.setTitle("Quản Lý Sách");
-                    setFragment(new QuanLySachFragment());
-                }if (item.getItemId() == R.id.imnu_QLtv){
-                    toolbar.setTitle("Quản lý Thành Viên");
-                    setFragment(new QuanLyThanhVienFragment());
+                    setFragment(new QuanLyPhieuMuonFragment(), "Quản lý phiếu mượn");
+                }
+                if (item.getItemId() == R.id.imnu_QLls) {
+                    setFragment(new QuanLyLoaiSachFragment(), "Quản Lý loai sach");
+                }
+                if (item.getItemId() == R.id.imnu_QLs) {
+                    setFragment(new QuanLySachFragment(), "Quản Lý Sách");
+                }
+                if (item.getItemId() == R.id.imnu_QLtv) {
+                    setFragment(new QuanLyThanhVienFragment(), "Quản lý Thành Viên");
                 }
                 //Thống Ke Fragment
                 //Người Dủng Fragment
+                if (item.getItemId() == R.id.inmu_add_user){
+                    setFragment(new ThemThanhVienFragment() , "Thêm thành viên");
+                }
+                if (item.getItemId() == R.id.inmu_change_pass){
+                    setFragment(new DoiMatKhauFragment(),"Đổi mật khẩu");
+                }
                 drawerLayout.close();
                 return true;
             }
         });
     }
+
     //hàm set fragment (dùng nhiều lần)
-    public void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment, String toolbarTitle) {
+        getSupportActionBar().setTitle(toolbarTitle);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.frameLayout, fragment)

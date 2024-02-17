@@ -37,4 +37,13 @@ public class ThuThu {
     public void setMatKhau(String matKhau) {
         MatKhau = matKhau;
     }
+
+    @Override
+    public String toString() {
+        return "ThuThu{" +
+                "MaTT='" + MaTT + '\'' +
+                ", HoTen='" + HoTen + '\'' +
+                ", MatKhau='" + MatKhau + '\'' +
+                '}';
+    }
 }

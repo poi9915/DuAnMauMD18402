@@ -43,4 +43,13 @@ public class ThanhVien {
     public void setNamSinh(String namSinh) {
         NamSinh = namSinh;
     }
+
+    @Override
+    public String toString() {
+        return "ThanhVien{" +
+                "MaTV='" + MaTV + '\'' +
+                ", HoTen='" + HoTen + '\'' +
+                ", NamSinh='" + NamSinh + '\'' +
+                '}';
+    }
 }

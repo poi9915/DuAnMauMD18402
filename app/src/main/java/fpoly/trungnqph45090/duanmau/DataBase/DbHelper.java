@@ -12,6 +12,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
+
     }
 
     @Override
@@ -57,6 +58,12 @@ public class DbHelper extends SQLiteOpenHelper {
                 "    foreign key (MaSach) references Sach(MaSach)" +
                 ");";
         db.execSQL(createPhieuMuon);
+        //Đoạn này đang lỗi , đọc phần Comment trong Seed
+        db.execSQL(Seed.ThuThuData);
+        db.execSQL(Seed.SachData);
+        db.execSQL(Seed.PhieuMuonData);
+        db.execSQL(Seed.ThanhVienData);
+        db.execSQL(Seed.LoaiSachData);
     }
 
     @Override
@@ -71,6 +78,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(dropLoaiSach);
         db.execSQL(dropSach);
         db.execSQL(dropPhieuMuon);
+
         onCreate(db);
     }
 }

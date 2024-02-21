@@ -93,20 +93,23 @@ public class PhieuMuonDAO {
     }
 
     @SuppressLint("Range")
-    public ArrayList<Top> getTop(String tuNgay, String denNgay) {
+    public ArrayList<Top> getTop() {
         ArrayList<Top> list = new ArrayList<>();
-        String sqlTop = "Select MaSach , count(MaSach) as SoLuong FROM PhieuMuon GROUP BY MaSach ORDER BY SoLuong DESC LIMIT 10";
+        String sqlTop = "SELECT MaSach, COUNT(MaSach) AS SoLuong FROM PhieuMuon GROUP BY MaSach ORDER BY SoLuong DESC LIMIT 10";
         SachDAO sachDAO = new SachDAO(context);
         Cursor cursor = db.rawQuery(sqlTop, null);
         while (cursor.moveToNext()) {
             Top top = new Top();
-            Sach sach = sachDAO.getByID(cursor.getString(cursor.getColumnIndex("MaSach")));
+            String Id  = cursor.getString(cursor.getColumnIndex("MaSach"));
+            Sach sach = sachDAO.getByID(Id);
             top.setTenSach(sach.getTenSach());
-            top.setSoLuong(Integer.parseInt(cursor.getString(cursor.getColumnIndex("SoLuong"))));
+            top.setSoLuong(cursor.getInt(cursor.getColumnIndex("SoLuong")));
             list.add(top);
         }
+        cursor.close(); // Close the cursor when done to release its resources
         return list;
     }
+
 
     @SuppressLint("Range")
     public int getDoanThu(String tuNgay , String denNgay){

@@ -1,5 +1,6 @@
 package fpoly.trungnqph45090.duanmau;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -18,6 +19,7 @@ import fpoly.trungnqph45090.duanmau.Fragments.QuanLyPhieuMuonFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLySachFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLyThanhVienFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.ThemThanhVienFragment;
+import fpoly.trungnqph45090.duanmau.Fragments.TopFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,12 +66,18 @@ public class MainActivity extends AppCompatActivity {
                     setFragment(new QuanLyThanhVienFragment(), "Quản lý Thành Viên");
                 }
                 //Thống Ke Fragment
+                if (item.getItemId() == R.id.inmu_TopBook){
+                    setFragment(new TopFragment() , "Top sách");
+                }
                 //Người Dủng Fragment
                 if (item.getItemId() == R.id.inmu_add_user){
                     setFragment(new ThemThanhVienFragment() , "Thêm thành viên");
                 }
                 if (item.getItemId() == R.id.inmu_change_pass){
                     setFragment(new DoiMatKhauFragment(),"Đổi mật khẩu");
+                }
+                if (item.getItemId()==R.id.imnu_logout){
+                    startActivity(new Intent(MainActivity.this,LoginActivity.class));
                 }
                 drawerLayout.close();
                 return true;

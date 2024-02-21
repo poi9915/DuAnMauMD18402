@@ -25,7 +25,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
-import fpoly.trungnqph45090.duanmau.Adapter.LoaiSachSpinnerAdapter;
+import fpoly.trungnqph45090.duanmau.Spinners.LoaiSachSpinnerAdapter;
 import fpoly.trungnqph45090.duanmau.Adapter.QuanLySachAdapter;
 import fpoly.trungnqph45090.duanmau.DAO.LoaiSachDAO;
 import fpoly.trungnqph45090.duanmau.DAO.SachDAO;

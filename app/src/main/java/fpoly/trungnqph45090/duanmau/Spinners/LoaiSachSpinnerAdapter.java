@@ -1,4 +1,4 @@
-package fpoly.trungnqph45090.duanmau.Adapter;
+package fpoly.trungnqph45090.duanmau.Spinners;
 
 import android.content.Context;
 import android.view.LayoutInflater;

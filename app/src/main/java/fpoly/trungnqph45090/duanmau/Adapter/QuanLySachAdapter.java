@@ -24,6 +24,7 @@ import fpoly.trungnqph45090.duanmau.DAO.SachDAO;
 import fpoly.trungnqph45090.duanmau.Models.LoaiSach;
 import fpoly.trungnqph45090.duanmau.Models.Sach;
 import fpoly.trungnqph45090.duanmau.R;
+import fpoly.trungnqph45090.duanmau.Spinners.LoaiSachSpinnerAdapter;
 
 public class QuanLySachAdapter extends RecyclerView.Adapter<QuanLySachAdapter.ViewHolder> {
     ArrayList<Sach> list;
@@ -123,10 +124,8 @@ public class QuanLySachAdapter extends RecyclerView.Adapter<QuanLySachAdapter.Vi
         btnQLsachAdd.setEnabled(false);
         builder.setPositiveButton("Yes", (dialog, which) -> {
             Sach item = new Sach(sach.getMaSach(), edTenS.getEditText().getText().toString(), Integer.parseInt(edGiaThue.getEditText().getText().toString()), maLS);
+            dao.updateSach(item);
 
-            if (dao.updateSach(item) > 0) {
-                Toast.makeText(context, "Update Thành công", Toast.LENGTH_SHORT).show();
-            }
             list.set(pos, item);
             notifyDataSetChanged();
         });

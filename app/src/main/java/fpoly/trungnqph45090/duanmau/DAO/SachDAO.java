@@ -52,16 +52,18 @@ public class SachDAO {
     }
     @SuppressLint("Range")
     public Sach getByID(String id) {
-       Cursor cursor = db.rawQuery("select * from LoaiSach where MaLoai =" + id, null);
-       cursor.moveToFirst();
-       Sach item = new Sach();
-       item.setMaSach(cursor.getInt(cursor.getColumnIndex("MaSach")));
-       item.setTenSach(cursor.getString(cursor.getColumnIndex("TenSach")));
-       item.setGiaThue(cursor.getInt(cursor.getColumnIndex("GiaThue")));
-       item.setMaLoai(cursor.getInt(cursor.getColumnIndex("MaLoai")));
+        Cursor cursor = db.rawQuery("SELECT * FROM Sach WHERE MaSach = ?", new String[]{id});
+        Sach item = new Sach();
+        if (cursor.moveToFirst()) {
+            item.setMaSach(cursor.getInt(cursor.getColumnIndex("MaSach")));
+            item.setTenSach(cursor.getString(cursor.getColumnIndex("TenSach")));
+            item.setGiaThue(cursor.getInt(cursor.getColumnIndex("GiaThue")));
+            item.setMaLoai(cursor.getInt(cursor.getColumnIndex("MaLoai")));
+        }
         cursor.close();
-       return item;
+        return item;
     }
+
 
     public int removeByID(Sach sach) {
         String[] id = new String[]{String.valueOf(sach.getMaSach())};
@@ -73,7 +75,7 @@ public class SachDAO {
         values.put("TenSach" , sach.getTenSach());
         values.put("GiaThue",sach.getGiaThue());
         values.put("MaLoai",sach.getMaLoai());
-        return db.update("Sach", values, "MaSach = ?", new String[]{String.valueOf(sach.getMaLoai())});
+        return db.update("Sach", values, "MaSach = ?", new String[]{String.valueOf(sach.getMaSach())});
     }
     ;
 //    public int removeThanhVien(ThanhVien thanhVien) {

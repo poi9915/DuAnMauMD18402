@@ -25,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createThuThu);
 
         String createThanhVien = "create table ThanhVien(" +
-                "    MaTV text primary key autoincrement ," +
+                "    MaTV text primary key  ," +
                 "    HoTen text not null ," +
                 "    NamSinh text not null " +
                 ");";

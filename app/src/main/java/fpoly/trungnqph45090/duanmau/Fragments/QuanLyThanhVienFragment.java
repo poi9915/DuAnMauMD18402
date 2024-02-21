@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 import fpoly.trungnqph45090.duanmau.Adapter.QuanLyThanhVienAdapter;
 import fpoly.trungnqph45090.duanmau.DAO.ThanhVienDAO;
+import fpoly.trungnqph45090.duanmau.Models.Sach;
 import fpoly.trungnqph45090.duanmau.Models.ThanhVien;
 import fpoly.trungnqph45090.duanmau.R;
 
@@ -39,6 +41,7 @@ public class QuanLyThanhVienFragment extends Fragment {
     FloatingActionButton fabThanhVien;
     TextInputLayout edQLvNAme;
     TextInputLayout edQLTvNam;
+    Sach item;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -51,9 +54,15 @@ public class QuanLyThanhVienFragment extends Fragment {
         adapter = new QuanLyThanhVienAdapter(getContext(), list);
         rec.setLayoutManager(new LinearLayoutManager(getContext()));
         rec.setAdapter(adapter);
+        if (fabThanhVien != null){
+
+        }else {
+            Log.d("Daaaaaal","suck");
+        }
         fabThanhVien.setOnClickListener(v -> {
             ShowAddDialog(getContext());
         });
+
     }
 
     private void ShowAddDialog(Context context) {
@@ -70,17 +79,19 @@ public class QuanLyThanhVienFragment extends Fragment {
 
         }));
         builder.setPositiveButton("Yes", ((dialog, which) -> {
-            if (valid(context) == 1) {
+            if (valid(context) == 0) {
                 String name = edQLvNAme.getEditText().getText().toString();
                 String namSinh = edQLTvNam.getEditText().getText().toString();
                 ThanhVien tv = new ThanhVien(name, namSinh);
                 if (dao.insertThanhVien(tv) > 0) {
+                    list.add(tv);
+                    adapter.notifyDataSetChanged();
+                    reloadFragment();
                     Toast.makeText(context, "Thêm Thành công", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }
-                adapter.notifyDataSetChanged();
-                reloadFragment();
+
             }
 
         }));

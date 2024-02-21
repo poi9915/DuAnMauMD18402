@@ -11,7 +11,7 @@ import java.util.List;
 
 import fpoly.trungnqph45090.duanmau.DataBase.DbHelper;
 import fpoly.trungnqph45090.duanmau.Models.Sach;
-import fpoly.trungnqph45090.duanmau.Models.ThuThu;
+import fpoly.trungnqph45090.duanmau.Models.ThanhVien;
 
 public class SachDAO {
     private DbHelper dbHelper;
@@ -22,14 +22,15 @@ public class SachDAO {
         db = dbHelper.getWritableDatabase();
     }
 
-    public void insertSach(Sach sach){
+    public long insertSach(Sach sach) {
         ContentValues values = new ContentValues();
-        values.put("MaSach" , sach.getMaSach());
-        values.put("TenSach" ,sach.getTenSach());
-        values.put("GiaThue" , sach.getGiaThue());
-        values.put("MaLoai"  , sach.getMaLoai());
-        db.insert("Sach",null , values);
+
+        values.put("TenSach", sach.getTenSach());
+        values.put("GiaThue", sach.getGiaThue());
+        values.put("MaLoai", sach.getMaLoai());
+        return db.insert("Sach", null, values);
     }
+
     @SuppressLint("Range")
     public ArrayList<Sach> getData(String sql, String... selectionArgs) {
         ArrayList<Sach> list = new ArrayList<>();
@@ -38,19 +39,45 @@ public class SachDAO {
             Sach obj = new Sach();
             obj.setMaSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MaSach"))));
             obj.setTenSach(cursor.getString(cursor.getColumnIndex("TenSach")));
-            obj.setGiaThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MatKhau"))));
+            obj.setGiaThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("GiaThue"))));
             obj.setMaLoai(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MaLoai"))));
             list.add(obj);
         }
         return list;
     }
-    public ArrayList<Sach> getAll(){
+
+    public ArrayList<Sach> getAll() {
         String sql = "SELECT * FROM Sach";
         return getData(sql);
     }
-    public Sach getByID(String id){
-        String sql = "SELECT * FROM WHERE MaSach=?";
-        List<Sach> list = getData(sql,id);
-        return list.get(0);
+    @SuppressLint("Range")
+    public Sach getByID(String id) {
+       Cursor cursor = db.rawQuery("select * from LoaiSach where MaLoai =" + id, null);
+       cursor.moveToFirst();
+       Sach item = new Sach();
+       item.setMaSach(cursor.getInt(cursor.getColumnIndex("MaSach")));
+       item.setTenSach(cursor.getString(cursor.getColumnIndex("TenSach")));
+       item.setGiaThue(cursor.getInt(cursor.getColumnIndex("GiaThue")));
+       item.setMaLoai(cursor.getInt(cursor.getColumnIndex("MaLoai")));
+        cursor.close();
+       return item;
     }
+
+    public int removeByID(Sach sach) {
+        String[] id = new String[]{String.valueOf(sach.getMaSach())};
+        return db.delete("Sach", "MaSach = ?", id);
+    }
+
+    public int updateSach(Sach sach) {
+        ContentValues values = new ContentValues();
+        values.put("TenSach" , sach.getTenSach());
+        values.put("GiaThue",sach.getGiaThue());
+        values.put("MaLoai",sach.getMaLoai());
+        return db.update("Sach", values, "MaSach = ?", new String[]{String.valueOf(sach.getMaLoai())});
+    }
+    ;
+//    public int removeThanhVien(ThanhVien thanhVien) {
+//        String[] id = new String[]{String.valueOf(thanhVien.getMaTV())};
+//        return db.delete("ThanhVien", "MaTV = ?", id);
+//    }
 }

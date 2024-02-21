@@ -75,7 +75,6 @@ public class DoiMatKhauFragment extends Fragment {
 
     public static DoiMatKhauFragment newInstance(String param1, String param2) {
         DoiMatKhauFragment fragment = new DoiMatKhauFragment();
-
         return fragment;
     }
 

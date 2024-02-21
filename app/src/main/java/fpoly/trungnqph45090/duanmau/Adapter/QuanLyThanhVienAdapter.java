@@ -94,6 +94,7 @@ public class QuanLyThanhVienAdapter extends RecyclerView.Adapter<QuanLyThanhVien
                 } else {
                     Toast.makeText(context, "Thêm thất bại", Toast.LENGTH_SHORT).show();
                 }
+
                 list.set(pos,tv);
                 notifyDataSetChanged();
             }

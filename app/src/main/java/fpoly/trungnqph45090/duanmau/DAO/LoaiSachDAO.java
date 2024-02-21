@@ -13,6 +13,7 @@ import java.util.List;
 import fpoly.trungnqph45090.duanmau.DataBase.DbHelper;
 import fpoly.trungnqph45090.duanmau.Models.LoaiSach;
 import fpoly.trungnqph45090.duanmau.Models.PhieuMuon;
+import fpoly.trungnqph45090.duanmau.Models.Sach;
 
 public class LoaiSachDAO {
     private DbHelper dbHelper;
@@ -46,11 +47,19 @@ public class LoaiSachDAO {
         String sql ="SELECT * FROM LoaiSach";
         return getData(sql);
     }
-    public LoaiSach getById(String id ){
-        String sql = "SELECT * FROM LoaiSach WHERE MaLoai=?";
-        List<LoaiSach> list = getData(sql,id);
-        return list.get(0);
+    @SuppressLint("Range")
+    public LoaiSach getByID(String id) {
+        Cursor cursor = db.rawQuery("select * from LoaiSach where MaLoai = ?", new String[]{id});
+        LoaiSach item = null;
+        if (cursor.moveToFirst()) {
+            item = new LoaiSach();
+            item.setMaLoai(cursor.getInt(cursor.getColumnIndex("MaLoai")));
+            item.setTen(cursor.getString(cursor.getColumnIndex("Ten")));
+        }
+        cursor.close();
+        return item;
     }
+
     public int removeLoaiSach(LoaiSach loaiSach) {
         String[] id = new String[]{String.valueOf(loaiSach.getMaLoai())};
         return db.delete("LoaiSach", "MaLoai = ?", id);

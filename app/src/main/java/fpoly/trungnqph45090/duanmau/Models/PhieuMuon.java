@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class PhieuMuon {
     private int maPM;
-    private String maTT;
-    private String maTV;
+    private int maTT;
+    private int maTV;
     private int MaSach;
     private Date Ngay;
     private int TraSach;
     private int TienThue;
 
-    public PhieuMuon(int maPM, String maTT, String maTV, int maSach, Date ngay, int traSach, int tienThue) {
+    public PhieuMuon(int maPM, int maTT, int maTV, int maSach, Date ngay, int traSach, int tienThue) {
         this.maPM = maPM;
         this.maTT = maTT;
         this.maTV = maTV;
@@ -21,7 +21,7 @@ public class PhieuMuon {
         TienThue = tienThue;
     }
 
-    public PhieuMuon(String maTT, String maTV, int maSach, Date ngay, int traSach, int tienThue) {
+    public PhieuMuon(int maTT, int maTV, int maSach, Date ngay, int traSach, int tienThue) {
         this.maTT = maTT;
         this.maTV = maTV;
         MaSach = maSach;
@@ -42,19 +42,19 @@ public class PhieuMuon {
         this.maPM = maPM;
     }
 
-    public String getMaTT() {
+    public int getMaTT() {
         return maTT;
     }
 
-    public void setMaTT(String maTT) {
+    public void setMaTT(int maTT) {
         this.maTT = maTT;
     }
 
-    public String getMaTV() {
+    public int getMaTV() {
         return maTV;
     }
 
-    public void setMaTV(String maTV) {
+    public void setMaTV(int maTV) {
         this.maTV = maTV;
     }
 

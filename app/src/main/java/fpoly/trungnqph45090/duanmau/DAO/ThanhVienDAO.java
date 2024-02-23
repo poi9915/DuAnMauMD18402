@@ -33,7 +33,7 @@ public class ThanhVienDAO {
         Cursor cursor = db.rawQuery(sql, selectionArgs);
         while (cursor.moveToNext()) {
             ThanhVien obj = new ThanhVien();
-            obj.setMaTV(cursor.getString(cursor.getColumnIndex("MaTV")));
+            obj.setMaTV(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MaTV"))));
             obj.setHoTen(cursor.getString(cursor.getColumnIndex("HoTen")));
             obj.setNamSinh(cursor.getString(cursor.getColumnIndex("NamSinh")));
             list.add(obj);

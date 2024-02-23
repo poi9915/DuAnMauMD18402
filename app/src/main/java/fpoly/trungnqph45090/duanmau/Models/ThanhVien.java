@@ -1,11 +1,11 @@
 package fpoly.trungnqph45090.duanmau.Models;
 
 public class ThanhVien {
-    private String MaTV;
+    private int MaTV;
     private String HoTen;
     private String NamSinh;
 
-    public ThanhVien(String maTV, String hoTen, String namSinh) {
+    public ThanhVien(int maTV, String hoTen, String namSinh) {
         MaTV = maTV;
         HoTen = hoTen;
         NamSinh = namSinh;
@@ -20,11 +20,11 @@ public class ThanhVien {
 
     }
 
-    public String getMaTV() {
+    public int getMaTV() {
         return MaTV;
     }
 
-    public void setMaTV(String maTV) {
+    public void setMaTV(int maTV) {
         MaTV = maTV;
     }
 

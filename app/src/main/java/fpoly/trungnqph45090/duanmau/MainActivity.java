@@ -19,6 +19,7 @@ import fpoly.trungnqph45090.duanmau.Fragments.QuanLyPhieuMuonFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLySachFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.QuanLyThanhVienFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.ThemThanhVienFragment;
+import fpoly.trungnqph45090.duanmau.Fragments.ThongKeDoanhThuFragment;
 import fpoly.trungnqph45090.duanmau.Fragments.TopFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -68,6 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 //Thống Ke Fragment
                 if (item.getItemId() == R.id.inmu_TopBook){
                     setFragment(new TopFragment() , "Top sách");
+                }
+                if (item.getItemId() == R.id.inmu_TopDT){
+                    setFragment(new ThongKeDoanhThuFragment() , "Thống kê");
                 }
                 //Người Dủng Fragment
                 if (item.getItemId() == R.id.inmu_add_user){

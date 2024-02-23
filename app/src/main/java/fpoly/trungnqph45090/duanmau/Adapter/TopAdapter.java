@@ -30,8 +30,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Top top = list.get(position);
-        holder.tvTopSL.setText(String.valueOf(top.getSoLuong()));
-        holder.tvTopName.setText(top.getTenSach());
+        holder.tvTopSL.setText("Số Lần Mượn :"+String.valueOf(top.getSoLuong()));
+        holder.tvTopName.setText("Tên Sách :"+top.getTenSach());
     }
 
     @Override

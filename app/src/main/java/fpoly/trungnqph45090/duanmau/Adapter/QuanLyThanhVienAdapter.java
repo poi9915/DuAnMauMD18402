@@ -20,7 +20,7 @@ import fpoly.trungnqph45090.duanmau.DAO.ThanhVienDAO;
 import fpoly.trungnqph45090.duanmau.Models.ThanhVien;
 import fpoly.trungnqph45090.duanmau.R;
 
-public class QuanLyThanhVienAdapter extends RecyclerView.Adapter<QuanLyThanhVienAdapter.ViewHoler> {
+public class QuanLyThanhVienAdapter extends RecyclerView.Adapter<QuanLyThanhVienAdapter.ViewHolder> {
     ArrayList<ThanhVien> list;
     Context context;
     ThanhVienDAO dao;
@@ -35,13 +35,13 @@ public class QuanLyThanhVienAdapter extends RecyclerView.Adapter<QuanLyThanhVien
 
     @NonNull
     @Override
-    public ViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_ql_thanhvien, parent, false);
-        return new ViewHoler(view);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHoler holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ThanhVien tv = list.get(position);
 
         holder.tvNsTV.setText("Năm Sinh: " + tv.getNamSinh());
@@ -127,11 +127,11 @@ public class QuanLyThanhVienAdapter extends RecyclerView.Adapter<QuanLyThanhVien
         return list.size();
     }
 
-    public static class ViewHoler extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvMaTV, tvTenTV, tvNsTV;
         ImageButton btnXoaTV;
 
-        public ViewHoler(@NonNull View itemView) {
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvMaTV = itemView.findViewById(R.id.tvMaTV);
             tvTenTV = itemView.findViewById(R.id.tvTenTV);

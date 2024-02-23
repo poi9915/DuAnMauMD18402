@@ -2,23 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTopName"
         android:textSize="20dp"
         android:text="TenS"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="6" />
+ />
 
     <TextView
         android:id="@+id/tvTopSl"
         android:textSize="20dp"
         android:textStyle="bold"
         android:text="SL"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="4" />
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

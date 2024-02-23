@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,8 +67,8 @@ public class PhieuMuonDAO {
         while (cursor.moveToNext()) {
             PhieuMuon obj = new PhieuMuon();
             obj.setMaPM(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MaPM"))));
-            obj.setMaTT(cursor.getString(cursor.getColumnIndex("MaTT")));
-            obj.setMaTV(cursor.getString(cursor.getColumnIndex("MaTV")));
+            obj.setMaTT(cursor.getInt(cursor.getColumnIndex("MaTT")));
+            obj.setMaTV(cursor.getInt(cursor.getColumnIndex("MaTV")));
             obj.setMaSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("MaSach"))));
             obj.setTienThue(Integer.parseInt(cursor.getString(cursor.getColumnIndex("TienThue"))));
             obj.setTraSach(Integer.parseInt(cursor.getString(cursor.getColumnIndex("TraSach"))));
@@ -101,7 +102,7 @@ public class PhieuMuonDAO {
         while (cursor.moveToNext()) {
             Top top = new Top();
             String Id  = cursor.getString(cursor.getColumnIndex("MaSach"));
-            Sach sach = sachDAO.getByID(Id);
+            Sach sach = sachDAO.getByID(Integer.parseInt(Id));
             top.setTenSach(sach.getTenSach());
             top.setSoLuong(cursor.getInt(cursor.getColumnIndex("SoLuong")));
             list.add(top);
@@ -112,18 +113,21 @@ public class PhieuMuonDAO {
 
 
     @SuppressLint("Range")
-    public int getDoanThu(String tuNgay , String denNgay){
+    public int getDoanThu(String tuNgay, String denNgay) {
         String sqlDoanhThu = "select SUM(TienThue) as DoanhThu from PhieuMuon where Ngay between ? and ?";
-        ArrayList<Integer> list = new ArrayList<>();
-        Cursor cursor = db.rawQuery(sqlDoanhThu,new String[]{tuNgay,denNgay});
-        while (cursor.moveToNext()){
-            try{
-                list.add(Integer.parseInt(cursor.getString(cursor.getColumnIndex("DoanhThu"))));
-
-            }catch (Exception e){
-                list.add(0);
+        int doanhThu = 0; // Default value
+        Cursor cursor = db.rawQuery(sqlDoanhThu, new String[]{tuNgay, denNgay});
+        if (cursor.moveToFirst()) {
+            try {
+                doanhThu = cursor.getInt(cursor.getColumnIndex("DoanhThu"));
+                Log.d("TAGAGAG", "getDoanThu: " + doanhThu);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
-        return list.get(0);
+        cursor.close();
+        return doanhThu;
     }
+
+
 }

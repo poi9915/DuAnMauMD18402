@@ -26,7 +26,6 @@ public class LoaiSachDAO {
 
     public void insertloaiSach(LoaiSach loaiSach) {
         ContentValues values = new ContentValues();
-        values.put("MaLoai", loaiSach.getMaLoai());
         values.put("Ten", loaiSach.getTen());
         db.insert("LoaiSach", null, values);
     }

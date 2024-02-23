@@ -25,7 +25,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createThuThu);
 
         String createThanhVien = "create table ThanhVien(" +
-                "    MaTV text primary key  ," +
+                "    MaTV integer primary key autoincrement ," +
                 "    HoTen text not null ," +
                 "    NamSinh text not null " +
                 ");";
@@ -59,11 +59,11 @@ public class DbHelper extends SQLiteOpenHelper {
                 ");";
         db.execSQL(createPhieuMuon);
         //Đoạn này đang lỗi , đọc phần Comment trong Seed
-        db.execSQL(Seed.ThuThuData);
-        db.execSQL(Seed.SachData);
-        db.execSQL(Seed.PhieuMuonData);
-        db.execSQL(Seed.ThanhVienData);
-        db.execSQL(Seed.LoaiSachData);
+//        db.execSQL(Seed.ThuThuData);
+//        db.execSQL(Seed.SachData);
+//        db.execSQL(Seed.PhieuMuonData);
+//        db.execSQL(Seed.ThanhVienData);
+//        db.execSQL(Seed.LoaiSachData);
     }
 
     @Override

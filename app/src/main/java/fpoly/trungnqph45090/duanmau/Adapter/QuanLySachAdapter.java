@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -37,6 +38,7 @@ public class QuanLySachAdapter extends RecyclerView.Adapter<QuanLySachAdapter.Vi
     LoaiSachDAO lsDao;
     ArrayList<LoaiSach> listLS;
     Button btnQLsachAdd;
+
     int maLS;
 
     public QuanLySachAdapter(Context context, ArrayList<Sach> list) {
@@ -122,10 +124,27 @@ public class QuanLySachAdapter extends RecyclerView.Adapter<QuanLySachAdapter.Vi
         spLoaiSach.setSelection(lsPos);
         btnQLsachAdd = view.findViewById(R.id.btnQLsachAdd);
         btnQLsachAdd.setEnabled(false);
-        builder.setPositiveButton("Yes", (dialog, which) -> {
-            Sach item = new Sach(sach.getMaSach(), edTenS.getEditText().getText().toString(), Integer.parseInt(edGiaThue.getEditText().getText().toString()), maLS);
-            dao.updateSach(item);
+        spLoaiSach.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                maLS = listLS.get(position).getMaLoai();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        builder.setPositiveButton("Yes", (dialog, which) ->
+        {
+
+
+            Sach item = new Sach(
+                    sach.getMaSach(),
+                    edTenS.getEditText().getText().toString(),
+                    Integer.parseInt(edGiaThue.getEditText().getText().toString()),
+                    maLS);
+            dao.updateSach(item);
             list.set(pos, item);
             notifyDataSetChanged();
         });

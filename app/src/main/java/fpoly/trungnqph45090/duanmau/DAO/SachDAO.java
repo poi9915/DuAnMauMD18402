@@ -24,7 +24,6 @@ public class SachDAO {
 
     public long insertSach(Sach sach) {
         ContentValues values = new ContentValues();
-
         values.put("TenSach", sach.getTenSach());
         values.put("GiaThue", sach.getGiaThue());
         values.put("MaLoai", sach.getMaLoai());
@@ -51,7 +50,8 @@ public class SachDAO {
         return getData(sql);
     }
     @SuppressLint("Range")
-    public Sach getByID(String id) {
+    public Sach getByID(int idS) {
+        String id = String.valueOf(idS);
         Cursor cursor = db.rawQuery("SELECT * FROM Sach WHERE MaSach = ?", new String[]{id});
         Sach item = new Sach();
         if (cursor.moveToFirst()) {

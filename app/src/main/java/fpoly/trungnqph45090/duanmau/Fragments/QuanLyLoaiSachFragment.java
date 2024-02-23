@@ -1,13 +1,28 @@
 package fpoly.trungnqph45090.duanmau.Fragments;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
+
+import fpoly.trungnqph45090.duanmau.Adapter.QuanLyLoaiSachAdapter;
+import fpoly.trungnqph45090.duanmau.DAO.LoaiSachDAO;
+import fpoly.trungnqph45090.duanmau.Models.LoaiSach;
 import fpoly.trungnqph45090.duanmau.R;
 
 /**
@@ -16,14 +31,64 @@ import fpoly.trungnqph45090.duanmau.R;
  * create an instance of this fragment.
  */
 public class QuanLyLoaiSachFragment extends Fragment {
+    RecyclerView recViewLoaiSach;
+    FloatingActionButton fabLoaiSach;
+    LoaiSachDAO dao;
+    QuanLyLoaiSachAdapter adapter;
+    ArrayList<LoaiSach> list;
+    TextInputLayout   edTenLS;
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        recViewLoaiSach = view.findViewById(R.id.recViewLoaiSach);
+        fabLoaiSach = view.findViewById(R.id.fabLoaiSach);
 
+        dao = new LoaiSachDAO(getContext());
+        list = dao.getAll();
+        adapter = new QuanLyLoaiSachAdapter(getContext() , list);
 
+        recViewLoaiSach.setLayoutManager(new LinearLayoutManager(getContext()));
+        recViewLoaiSach.setAdapter(adapter);
+        fabLoaiSach.setOnClickListener(v ->{
+            showDialog(getContext());
+
+        });
+    }
+    public void showDialog(Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.item_loaisach_dialog , null);
+
+        edTenLS = view.findViewById(R.id.edTenLS);
+        builder.setTitle("Thêm loại sách");
+        builder.setNegativeButton("No" , (dialog, which) -> {
+            //Không làm gì cả
+        });
+        builder.setPositiveButton("Yes" , (dialog, which) -> {
+            String TenLS = edTenLS.getEditText().getText().toString();
+            LoaiSach item = new LoaiSach(TenLS);
+            item.setTen(TenLS);
+            list.add(item);
+            dao.insertloaiSach(item);
+            adapter.notifyDataSetChanged();
+            reloadFragment();
+        });
+
+        builder.setView(view);
+        builder.show();
+    }
+    public void reloadFragment() {
+        QuanLyLoaiSachFragment fragment = new QuanLyLoaiSachFragment();
+        FragmentTransaction fragmentTransaction = requireActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+    }
     public QuanLyLoaiSachFragment() {
         // Required empty public constructor
     }
 
 
-    public static QuanLyLoaiSachFragment newInstance(String param1, String param2) {
+    public static QuanLyLoaiSachFragment newInstance() {
         QuanLyLoaiSachFragment fragment = new QuanLyLoaiSachFragment();
 
         return fragment;

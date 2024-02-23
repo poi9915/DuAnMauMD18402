@@ -4,6 +4,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
     <TextView
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:id="@+id/tvMaLS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,6 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nhập tên sách"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:id="@+id/edTenS">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -23,6 +27,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Giá Thuê"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         android:id="@+id/edGiaThue">
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -34,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="25dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="25dp"
         android:layout_marginBottom="20dp"
         android:minHeight="48dp" />
     <LinearLayout

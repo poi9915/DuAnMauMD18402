@@ -6,12 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import fpoly.trungnqph45090.duanmau.DAO.ThuThuDAO;
+import fpoly.trungnqph45090.duanmau.Models.ThuThu;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
@@ -20,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
     RadioButton chkRem;
     String strUser;
     String strPass;
+    ImageButton btnQS;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,13 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         chkRem = findViewById(R.id.chkRem);
         dao = new ThuThuDAO(this);
+        btnQS = findViewById(R.id.btnQS);
         btnLogin.setOnClickListener(view ->{
             checkLogin();
+        });
+        btnQS.setOnClickListener(v -> {
+            dao.insertThuThu(new ThuThu("ad" , "ad" ,"ad"));
+            Toast.makeText(this, "Đã add admin default", Toast.LENGTH_SHORT).show();
         });
         SharedPreferences sharedPreferences = getSharedPreferences("USER_FILE" , MODE_PRIVATE);
         String user = sharedPreferences.getString("USERNAME" ,"");
